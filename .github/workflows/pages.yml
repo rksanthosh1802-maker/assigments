@@ -39,6 +39,13 @@ jobs:
           mkdir -p ../../site/Chapter2/2-OpenGLES3_Primitives-Modern
           cp -r web/. ../../site/Chapter2/2-OpenGLES3_Primitives-Modern/
 
+      - name: Build Assignment 1
+        working-directory: Assignment1
+        run: |
+          bash build_web.sh
+          mkdir -p ../site/Assignment1
+          cp -r web/. ../site/Assignment1/  
+
       - name: Generate index.html
         run: |
           cat > site/index.html << 'HTML'
@@ -55,6 +62,7 @@ jobs:
             <h2>Chapter 2 — Primitives</h2>
             <p>OpenGL primitives: point, line, and triangle with their variations.</p>
             <p><a href="Chapter2/2-OpenGLES3_Primitives-Modern/">Launch the demo</a></p>
+            <p><a href="Assignment1/">Launch Assignment 1</a></p>
           </body>
           </html>
           HTML
