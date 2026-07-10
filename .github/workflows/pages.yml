@@ -44,7 +44,7 @@ jobs:
         run: |
           bash build_web.sh
           mkdir -p ../site/Assignment1
-          cp -r web/. ../site/Assignment1/  
+          cp -r web/. ../site/Assignment1/
 
       - name: Generate index.html
         run: |
