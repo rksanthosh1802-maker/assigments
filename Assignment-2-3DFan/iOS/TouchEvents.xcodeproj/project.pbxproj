@@ -1,0 +1,647 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* ============================================================ */
+/* UUID key                                                     */
+/*  A0xx = PBXFileReference                                     */
+/*  B0xx = PBXBuildFile                                         */
+/*  C0xx = PBXGroup                                             */
+/*  D0xx = PBXBuildPhase                                        */
+/*  E001 = PBXNativeTarget                                      */
+/*  F001 = PBXProject root object   F002 = main group           */
+/*  G0xx = XCBuildConfiguration                                 */
+/*  H001 = XCConfigurationList (target)                         */
+/*  H002 = XCConfigurationList (project)                        */
+/* ============================================================ */
+
+/* ------------------------------------------------------------------ */
+/* PBXBuildFile                                                        */
+/* Sources:                                                            */
+/*   B001 main.mm           ← A001                                    */
+/*   B002 AppDelegate.mm    ← A003                                    */
+/*   B003 ViewController.mm ← A005                                    */
+/*   B004 GLView.mm         ← A007                                    */
+/*   B005 Renderer.cpp      ← A008                                    */
+/*   B006 Triangle.cpp      ← A00A                                    */
+/* Frameworks:                                                         */
+/*   B007 OpenGLES          ← A013                                    */
+/*   B008 UIKit             ← A014                                    */
+/*   B009 Foundation        ← A015                                    */
+/*   B00A QuartzCore        ← A016                                    */
+/* Resources:                                                          */
+/*   B00B LaunchScreen      ← A00F                                    */
+/*   B00C TriangleVertex    ← A011                                    */
+/*   B00D TriangleFragment  ← A012                                    */
+/* ------------------------------------------------------------------ */
+
+		B000000000000000000000001 /* main.mm in Sources */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000001 /* main.mm */; };
+		B000000000000000000000002 /* AppDelegate.mm in Sources */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000003 /* AppDelegate.mm */; };
+		B000000000000000000000003 /* ViewController.mm in Sources */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000005 /* ViewController.mm */; };
+		B000000000000000000000004 /* GLView.mm in Sources */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000007 /* GLView.mm */; };
+		B000000000000000000000005 /* Renderer.cpp in Sources */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000008 /* Renderer.cpp */; };
+		B000000000000000000000006 /* Triangle.cpp in Sources */ = {
+			isa = PBXBuildFile; fileRef = A00000000000000000000000A /* Triangle.cpp */; };
+		B000000000000000000000007 /* OpenGLES.framework in Frameworks */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000013 /* OpenGLES.framework */; };
+		B000000000000000000000008 /* UIKit.framework in Frameworks */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000014 /* UIKit.framework */; };
+		B000000000000000000000009 /* Foundation.framework in Frameworks */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000015 /* Foundation.framework */; };
+		B00000000000000000000000A /* QuartzCore.framework in Frameworks */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000016 /* QuartzCore.framework */; };
+		B00000000000000000000000B /* LaunchScreen.storyboard in Resources */ = {
+			isa = PBXBuildFile; fileRef = A00000000000000000000000F /* LaunchScreen.storyboard */; };
+		B00000000000000000000000C /* TriangleVertex.glsl in Resources */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000011 /* TriangleVertex.glsl */; };
+		B00000000000000000000000D /* TriangleFragment.glsl in Resources */ = {
+			isa = PBXBuildFile; fileRef = A000000000000000000000012 /* TriangleFragment.glsl */; };
+
+/* ------------------------------------------------------------------ */
+/* PBXFileReference                                                    */
+/*  iOS Sources                                                        */
+/*   A001 main.mm                                                      */
+/*   A002 AppDelegate.h                                                */
+/*   A003 AppDelegate.mm                                               */
+/*   A004 ViewController.h                                             */
+/*   A005 ViewController.mm                                            */
+/*   A006 GLView.h                                                     */
+/*   A007 GLView.mm                                                    */
+/*  Scene (relative paths to ../Scene/)                                */
+/*   A008 Renderer.cpp                                                 */
+/*   A009 Renderer.h                                                   */
+/*   A00A Triangle.cpp                                                 */
+/*   A00B Triangle.h                                                   */
+/*   A00C Platform.h                                                   */
+/*   A00D ShaderHelper.h                                               */
+/*   A00E Model.h          ← extra vs GLPIFrameworkIntro               */
+/*  Resources                                                          */
+/*   A00F LaunchScreen.storyboard                                      */
+/*   A010 Info.plist                                                   */
+/*  Shaders (from android assets)                                      */
+/*   A011 TriangleVertex.glsl                                          */
+/*   A012 TriangleFragment.glsl                                        */
+/*  Frameworks                                                         */
+/*   A013 OpenGLES.framework                                           */
+/*   A014 UIKit.framework                                              */
+/*   A015 Foundation.framework                                         */
+/*   A016 QuartzCore.framework                                         */
+/*  Product                                                            */
+/*   A017 TouchEvents.app                                              */
+/* ------------------------------------------------------------------ */
+
+		A000000000000000000000001 /* main.mm */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = main.mm;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000002 /* AppDelegate.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = AppDelegate.h;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000003 /* AppDelegate.mm */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = AppDelegate.mm;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000004 /* ViewController.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = ViewController.h;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000005 /* ViewController.mm */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = ViewController.mm;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000006 /* GLView.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			path = GLView.h;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000007 /* GLView.mm */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			path = GLView.mm;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000008 /* Renderer.cpp */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Renderer.cpp;
+			path = ../Scene/Renderer.cpp;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000009 /* Renderer.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Renderer.h;
+			path = ../Scene/Renderer.h;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000000A /* Triangle.cpp */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Triangle.cpp;
+			path = ../Scene/Triangle.cpp;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000000B /* Triangle.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Triangle.h;
+			path = ../Scene/Triangle.h;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000000C /* Platform.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Platform.h;
+			path = ../Scene/Platform.h;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000000D /* ShaderHelper.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = ShaderHelper.h;
+			path = ../Scene/ShaderHelper.h;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000000E /* Model.h */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Model.h;
+			path = ../Scene/Model.h;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000000F /* LaunchScreen.storyboard */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.storyboard;
+			path = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000010 /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		A000000000000000000000011 /* TriangleVertex.glsl */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			name = TriangleVertex.glsl;
+			path = "../android/app/src/main/assets/shader/TriangleVertex.glsl";
+			sourceTree = "<group>";
+		};
+		A000000000000000000000012 /* TriangleFragment.glsl */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			name = TriangleFragment.glsl;
+			path = "../android/app/src/main/assets/shader/TriangleFragment.glsl";
+			sourceTree = "<group>";
+		};
+		A000000000000000000000013 /* OpenGLES.framework */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = OpenGLES.framework;
+			path = System/Library/Frameworks/OpenGLES.framework;
+			sourceTree = SDKROOT;
+		};
+		A000000000000000000000014 /* UIKit.framework */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = UIKit.framework;
+			path = System/Library/Frameworks/UIKit.framework;
+			sourceTree = SDKROOT;
+		};
+		A000000000000000000000015 /* Foundation.framework */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Foundation.framework;
+			path = System/Library/Frameworks/Foundation.framework;
+			sourceTree = SDKROOT;
+		};
+		A000000000000000000000016 /* QuartzCore.framework */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = QuartzCore.framework;
+			path = System/Library/Frameworks/QuartzCore.framework;
+			sourceTree = SDKROOT;
+		};
+		A000000000000000000000017 /* TouchEvents.app */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = TouchEvents.app;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+
+/* ------------------------------------------------------------------ */
+/* PBXFrameworksBuildPhase                                             */
+/* ------------------------------------------------------------------ */
+
+		D000000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B000000000000000000000007 /* OpenGLES.framework in Frameworks */,
+				B000000000000000000000008 /* UIKit.framework in Frameworks */,
+				B000000000000000000000009 /* Foundation.framework in Frameworks */,
+				B00000000000000000000000A /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+/* ------------------------------------------------------------------ */
+/* PBXGroup                                                            */
+/* ------------------------------------------------------------------ */
+
+		F000000000000000000000002 /* TouchEvents — main group */ = {
+			isa = PBXGroup;
+			children = (
+				C000000000000000000000001 /* iOS Sources */,
+				C000000000000000000000002 /* Scene */,
+				C000000000000000000000003 /* Shaders */,
+				C000000000000000000000004 /* Frameworks */,
+				C000000000000000000000005 /* Resources */,
+				C000000000000000000000006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+
+		C000000000000000000000001 /* iOS Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A000000000000000000000001 /* main.mm */,
+				A000000000000000000000002 /* AppDelegate.h */,
+				A000000000000000000000003 /* AppDelegate.mm */,
+				A000000000000000000000004 /* ViewController.h */,
+				A000000000000000000000005 /* ViewController.mm */,
+				A000000000000000000000006 /* GLView.h */,
+				A000000000000000000000007 /* GLView.mm */,
+				A000000000000000000000010 /* Info.plist */,
+			);
+			name = "iOS Sources";
+			sourceTree = "<group>";
+		};
+
+		C000000000000000000000002 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				A000000000000000000000008 /* Renderer.cpp */,
+				A000000000000000000000009 /* Renderer.h */,
+				A00000000000000000000000A /* Triangle.cpp */,
+				A00000000000000000000000B /* Triangle.h */,
+				A00000000000000000000000C /* Platform.h */,
+				A00000000000000000000000D /* ShaderHelper.h */,
+				A00000000000000000000000E /* Model.h */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+
+		C000000000000000000000003 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				A000000000000000000000011 /* TriangleVertex.glsl */,
+				A000000000000000000000012 /* TriangleFragment.glsl */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+
+		C000000000000000000000004 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A000000000000000000000013 /* OpenGLES.framework */,
+				A000000000000000000000014 /* UIKit.framework */,
+				A000000000000000000000015 /* Foundation.framework */,
+				A000000000000000000000016 /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+
+		C000000000000000000000005 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000000F /* LaunchScreen.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+
+		C000000000000000000000006 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A000000000000000000000017 /* TouchEvents.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+
+/* ------------------------------------------------------------------ */
+/* PBXNativeTarget                                                     */
+/* ------------------------------------------------------------------ */
+
+		E000000000000000000000001 /* TouchEvents */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = H000000000000000000000001 /* Build configuration list for PBXNativeTarget */;
+			buildPhases = (
+				D000000000000000000000002 /* Sources */,
+				D000000000000000000000001 /* Frameworks */,
+				D000000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TouchEvents;
+			productName = TouchEvents;
+			productReference = A000000000000000000000017 /* TouchEvents.app */;
+			productType = "com.apple.product-type.application";
+		};
+
+/* ------------------------------------------------------------------ */
+/* PBXProject                                                          */
+/* ------------------------------------------------------------------ */
+
+		F000000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					E000000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = H000000000000000000000002 /* Build configuration list for PBXProject */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F000000000000000000000002;
+			productRefGroup = C000000000000000000000006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E000000000000000000000001 /* TouchEvents */,
+			);
+		};
+
+/* ------------------------------------------------------------------ */
+/* PBXResourcesBuildPhase                                              */
+/* ------------------------------------------------------------------ */
+
+		D000000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000000B /* LaunchScreen.storyboard in Resources */,
+				B00000000000000000000000C /* TriangleVertex.glsl in Resources */,
+				B00000000000000000000000D /* TriangleFragment.glsl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+/* ------------------------------------------------------------------ */
+/* PBXSourcesBuildPhase                                                */
+/* ------------------------------------------------------------------ */
+
+		D000000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B000000000000000000000001 /* main.mm in Sources */,
+				B000000000000000000000002 /* AppDelegate.mm in Sources */,
+				B000000000000000000000003 /* ViewController.mm in Sources */,
+				B000000000000000000000004 /* GLView.mm in Sources */,
+				B000000000000000000000005 /* Renderer.cpp in Sources */,
+				B000000000000000000000006 /* Triangle.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+/* ------------------------------------------------------------------ */
+/* XCBuildConfiguration                                                */
+/* ------------------------------------------------------------------ */
+
+		G000000000000000000000001 /* Debug — Project */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+
+		G000000000000000000000002 /* Release — Project */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+
+		G000000000000000000000003 /* Debug — Target */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Scene",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.touchevents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				/* OpenGL ES is deprecated since iOS 12 but fully functional.
+				   These are intentional ES 3.0 teaching examples. */
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
+			};
+			name = Debug;
+		};
+
+		G000000000000000000000004 /* Release — Target */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../Scene",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.touchevents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
+			};
+			name = Release;
+		};
+
+/* ------------------------------------------------------------------ */
+/* XCConfigurationList                                                 */
+/* ------------------------------------------------------------------ */
+
+		H000000000000000000000001 /* Build configuration list for PBXNativeTarget */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G000000000000000000000003 /* Debug */,
+				G000000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+
+		H000000000000000000000002 /* Build configuration list for PBXProject */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G000000000000000000000001 /* Debug */,
+				G000000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+
+	};
+	rootObject = F000000000000000000000001 /* Project object */;
+}
