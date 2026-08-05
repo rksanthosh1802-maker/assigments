@@ -1,29 +1,17 @@
-cmake_minimum_required(VERSION 3.22.1)
+cmake_minimum_required(VERSION 3.15)
 
-project("fan3d")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
-# Enforce C++17 across all targets
+cmake_policy(VERSION 3.15)
+
+project(Fan3D)
+
 set(CMAKE_CXX_STANDARD          17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Android-only guard
-if(NOT ANDROID)
-    message(FATAL_ERROR
-        "This CMakeLists.txt is for Android builds only. "
-        "Use the platform-specific build system for other targets.")
-endif()
+include(ImportDependencies)
+importDependencies()
 
-add_definitions(-DANDROID -DPLATFORM_ANDROID)
-
-# ---------------------------------------------------------------------------
-# Shared Scene sources live in the project root (5 levels up from this file):
-#   android/app/src/main/cpp/CMakeLists.txt → project root → Scene/
-# ---------------------------------------------------------------------------
-set(SCENE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../Scene)
-
-# ---------------------------------------------------------------------------
-# GLM (header-only) - required by Scene/Transform.h
-# ---------------------------------------------------------------------------
 include(FetchContent)
 FetchContent_Declare(
     glm
@@ -32,39 +20,32 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glm)
 
-add_library(fan3d SHARED
-    # Android JNI bridge
-    NativeTemplate.cpp
+add_definitions(-DPLATFORM_WINDOWS -DGLEW_STATIC)
 
-    # Shared rendering code
-    ${SCENE_DIR}/Renderer.cpp
-    ${SCENE_DIR}/Transform.cpp
-    ${SCENE_DIR}/Fan.cpp
-    ${SCENE_DIR}/Ground.cpp
-    ${SCENE_DIR}/Scene3D.cpp
-    ${SCENE_DIR}/SceneHUD.cpp
+set(SCENE_DIR ${CMAKE_CURRENT_LIST_DIR}/Scene)
+file(GLOB SCENE_SRC "${SCENE_DIR}/*.cpp")
+
+add_executable(Fan3D ${SCENE_SRC})
+
+target_include_directories(Fan3D PRIVATE ${SCENE_DIR})
+
+target_link_libraries(Fan3D
+    PRIVATE glfw
+    PRIVATE libglew_static
+    PRIVATE glm::glm
 )
 
-# ---------------------------------------------------------------------------
-# Include paths
-# ---------------------------------------------------------------------------
-target_include_directories(fan3d PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}   # NativeTemplate.cpp sits here
-    ${SCENE_DIR}                  # All shared Scene headers
+if(MSVC)
+    target_compile_options(Fan3D PRIVATE /W4 /WX- /permissive- /std:c++17)
+endif()
+
+add_custom_command(TARGET Fan3D POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_LIST_DIR}/android/app/src/main/assets"
+        "$<TARGET_FILE_DIR:Fan3D>/assets"
+    COMMENT "Copying shader assets to build directory"
 )
 
-# ---------------------------------------------------------------------------
-# System libraries provided by the Android NDK
-# ---------------------------------------------------------------------------
-find_library(log-lib    log)
-find_library(android-lib android)
-find_library(glesv3-lib GLESv3)
-find_library(egl-lib    EGL)
-
-target_link_libraries(fan3d
-    glm::glm
-    ${log-lib}
-    ${android-lib}
-    ${glesv3-lib}
-    ${egl-lib}
+set_target_properties(Fan3D PROPERTIES
+    VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:Fan3D>"
 )
