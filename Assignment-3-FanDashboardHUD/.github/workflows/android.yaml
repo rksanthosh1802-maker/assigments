@@ -8,13 +8,8 @@ on:
 
 jobs:
   build:
-    name: "Android • ${{ matrix.name }}"
+    name: "Android • 3D Fan"
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { project: Chapter2/2-OpenGLES3_Primitives-Modern, name: 2-OpenGLES3_Primitives-Modern }
 
     steps:
       - uses: actions/checkout@v4
@@ -31,15 +26,13 @@ jobs:
         run: |
           sdkmanager "ndk;27.0.12077973" "cmake;3.22.1" --sdk_root="${ANDROID_HOME}"
 
-      # gradlew is not committed, so there is no wrapper script for
-      # setup-gradle's `gradle-version: wrapper` mode to introspect — it
-      # silently fell back to the runner's default Gradle (9.x) instead of
-      # this project's pinned version, and AGP 8.x is incompatible with
-      # Gradle 9.x internal API changes. Read the pinned version directly
-      # out of gradle-wrapper.properties ourselves and pass it explicitly.
+      # gradlew is not committed, so setup-gradle's `gradle-version: wrapper`
+      # mode has no wrapper script to introspect and silently falls back to the
+      # runner's default Gradle (9.x), which AGP 8.x is incompatible with.
+      # Read the pinned version out of gradle-wrapper.properties and pass it in.
       - name: Read pinned Gradle version
         id: gradle_ver
-        working-directory: ${{ matrix.project }}/android
+        working-directory: android
         run: |
           VER=$(grep distributionUrl gradle/wrapper/gradle-wrapper.properties \
             | sed -E 's/.*gradle-([0-9.]+)-.*/\1/')
@@ -54,19 +47,19 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: ${{ steps.gradle_ver.outputs.version }}
-          build-root-directory: ${{ matrix.project }}/android
+          build-root-directory: android
           cache-read-only: false
 
       - name: Write local.properties
-        working-directory: ${{ matrix.project }}/android
+        working-directory: android
         run: echo "sdk.dir=${ANDROID_HOME}" > local.properties
 
       - name: assembleDebug
-        working-directory: ${{ matrix.project }}/android
+        working-directory: android
         run: gradle assembleDebug --no-daemon --stacktrace
 
       - uses: actions/upload-artifact@v4
         with:
-          name: apk-${{ matrix.name }}
-          path: ${{ matrix.project }}/android/app/build/outputs/apk/debug/*.apk
+          name: apk-fan3d
+          path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error

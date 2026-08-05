@@ -8,14 +8,14 @@ on:
 
 jobs:
   build:
-    name: "Desktop • ${{ matrix.name }} • ${{ matrix.os }}"
+    name: "Desktop • ${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - { project: Chapter2/2-OpenGLES3_Primitives-Modern, name: 2-OpenGLES3_Primitives-Modern, os: ubuntu-latest  }
-          - { project: Chapter2/2-OpenGLES3_Primitives-Modern, name: 2-OpenGLES3_Primitives-Modern, os: windows-latest }
+          - { os: ubuntu-latest  }
+          - { os: windows-latest }
 
     steps:
       - uses: actions/checkout@v4
@@ -33,18 +33,15 @@ jobs:
       - name: Cache FetchContent deps
         uses: actions/cache@v4
         with:
-          path: ${{ matrix.project }}/build_ci/_deps
-          key: cmake-deps-${{ runner.os }}-${{ matrix.name }}-${{ hashFiles(format('{0}/cmake/ImportDependencies.cmake', matrix.project)) }}
-          restore-keys: cmake-deps-${{ runner.os }}-${{ matrix.name }}-
+          path: build_ci/_deps
+          key: cmake-deps-${{ runner.os }}-${{ hashFiles('cmake/ImportDependencies.cmake', 'CMakeLists.txt') }}
+          restore-keys: cmake-deps-${{ runner.os }}-
 
       # ── Windows only ────────────────────────────────────────────────────────
-      # Load the MSVC environment (cl.exe, link.exe, etc.) directly and build
-      # with Ninja instead of asking CMake to generate a Visual Studio solution.
-      # The "Visual Studio 17 2022" generator depends on CMake locating an
-      # installed VS instance via vswhere, which has been flaky/missing on
-      # some windows-latest runner images ("could not find any instance of
-      # Visual Studio") even though the MSVC toolchain itself is present.
-      # Ninja + msvc-dev-cmd sidesteps that VS-instance discovery entirely.
+      # Load the MSVC environment directly and build with Ninja instead of
+      # generating a Visual Studio solution. The "Visual Studio 17 2022"
+      # generator relies on CMake finding an installed VS instance via vswhere,
+      # which has been flaky on some windows-latest runner images.
       - name: Setup MSVC environment (Windows)
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
@@ -56,15 +53,12 @@ jobs:
       # ── CMake configure ─────────────────────────────────────────────────────
       - name: CMake configure (Linux)
         if: runner.os == 'Linux'
-        working-directory: ${{ matrix.project }}
         run: cmake -S . -B build_ci -DCMAKE_BUILD_TYPE=Release
 
       - name: CMake configure (Windows)
         if: runner.os == 'Windows'
-        working-directory: ${{ matrix.project }}
         run: cmake -S . -B build_ci -G "Ninja" -DCMAKE_BUILD_TYPE=Release
 
       # ── CMake build ─────────────────────────────────────────────────────────
       - name: CMake build
-        working-directory: ${{ matrix.project }}
         run: cmake --build build_ci --config Release --parallel
