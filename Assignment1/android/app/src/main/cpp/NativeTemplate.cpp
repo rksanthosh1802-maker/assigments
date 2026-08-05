@@ -7,9 +7,13 @@
 #define LOG_TAG "AndroidProgrammingQuizNative"
 
 #include <jni.h>
+#include <android/log.h>
 #include <android/asset_manager_jni.h>
 
 #include "Renderer.h"
+
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,  LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 extern "C" JNIEXPORT jboolean JNICALL
 Java_com_example_helloworldandroid_MainActivity_nativeInit(

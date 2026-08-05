@@ -1,0 +1,64 @@
+name: Desktop
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: "Desktop • ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest  }
+          - { os: windows-latest }
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Linux only ──────────────────────────────────────────────────────────
+      - name: Install OpenGL, X11 and Wayland headers (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            libx11-dev libxrandr-dev libxinerama-dev \
+            libxcursor-dev libxi-dev libgl1-mesa-dev \
+            libwayland-dev wayland-protocols libxkbcommon-dev
+
+      - name: Cache FetchContent deps
+        uses: actions/cache@v4
+        with:
+          path: build_ci/_deps
+          key: cmake-deps-${{ runner.os }}-${{ hashFiles('cmake/ImportDependencies.cmake', 'CMakeLists.txt') }}
+          restore-keys: cmake-deps-${{ runner.os }}-
+
+      # ── Windows only ────────────────────────────────────────────────────────
+      # Load the MSVC environment directly and build with Ninja instead of
+      # generating a Visual Studio solution. The "Visual Studio 17 2022"
+      # generator relies on CMake finding an installed VS instance via vswhere,
+      # which has been flaky on some windows-latest runner images.
+      - name: Setup MSVC environment (Windows)
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install Ninja (Windows)
+        if: runner.os == 'Windows'
+        uses: seanmiddleditch/gha-setup-ninja@v4
+
+      # ── CMake configure ─────────────────────────────────────────────────────
+      - name: CMake configure (Linux)
+        if: runner.os == 'Linux'
+        run: cmake -S . -B build_ci -DCMAKE_BUILD_TYPE=Release
+
+      - name: CMake configure (Windows)
+        if: runner.os == 'Windows'
+        run: cmake -S . -B build_ci -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+
+      # ── CMake build ─────────────────────────────────────────────────────────
+      - name: CMake build
+        run: cmake --build build_ci --config Release --parallel
