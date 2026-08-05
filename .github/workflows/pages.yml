@@ -13,15 +13,15 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-# Deploys the WebGL build from Assignment-3-FanDashboardHUD (the latest
-# quiz) as the repo's single live Pages site. Only one site can be deployed
-# per repo, so this intentionally does not also build Assignment1 or
-# Assignment-2-3DFan for Pages - core1 only requires Android/Windows/Unix
-# desktop CI coverage for all three; Pages is a separate, single-target
-# deliverable that simply now lives one folder deeper.
+# Builds the WebGL target for all three quizzes and deploys them as separate
+# subpaths under one Pages site:
+#   https://<user>.github.io/<repo>/Assignment1/
+#   https://<user>.github.io/<repo>/Assignment-2-3DFan/
+#   https://<user>.github.io/<repo>/Assignment-3-FanDashboardHUD/
+# with a small landing page at the site root linking to each.
 jobs:
   build-web:
-    name: Build WebGL build
+    name: Build WebGL builds
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,16 +32,40 @@ jobs:
           version: "3.1.64"
           actions-cache-folder: .emsdk-cache
 
-      # build_web.sh already passes -s MIN_WEBGL_VERSION=2 and fetches GLM,
-      # so no flags need to be injected here.
-      - name: Build the 3D Fan for WebGL
+      - name: Build Assignment1 for WebGL
+        working-directory: Assignment1
+        run: bash build_web.sh
+
+      - name: Build Assignment-2-3DFan for WebGL
+        working-directory: Assignment-2-3DFan
+        run: bash build_web.sh
+
+      - name: Build Assignment-3-FanDashboardHUD for WebGL
         working-directory: Assignment-3-FanDashboardHUD
         run: bash build_web.sh
 
       - name: Assemble the site
         run: |
-          mkdir -p site
-          cp -r Assignment-3-FanDashboardHUD/web/. site/
+          mkdir -p site/Assignment1
+          mkdir -p site/Assignment-2-3DFan
+          mkdir -p site/Assignment-3-FanDashboardHUD
+          cp -r Assignment1/web/. site/Assignment1/
+          cp -r Assignment-2-3DFan/web/. site/Assignment-2-3DFan/
+          cp -r Assignment-3-FanDashboardHUD/web/. site/Assignment-3-FanDashboardHUD/
+          cat > site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head><meta charset="utf-8"><title>Android Programming Quizzes</title></head>
+          <body style="font-family: sans-serif; max-width: 640px; margin: 40px auto;">
+            <h1>Android Programming Quizzes - WebGL builds</h1>
+            <ul>
+              <li><a href="Assignment1/">Assignment 1</a></li>
+              <li><a href="Assignment-2-3DFan/">Assignment 2 - 3D Fan</a></li>
+              <li><a href="Assignment-3-FanDashboardHUD/">Assignment 3 - Fan Dashboard HUD</a></li>
+            </ul>
+          </body>
+          </html>
+          EOF
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
