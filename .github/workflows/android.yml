@@ -64,7 +64,7 @@ jobs:
 
       - name: assembleDebug
         working-directory: ${{ matrix.project }}/android
-        run: gradle assembleDebug --no-daemon --stacktrace
+        run: gradle assembleDebug --no-daemon --stacktrace --no-configuration-cache --no-build-cache
 
       - uses: actions/upload-artifact@v4
         with:
